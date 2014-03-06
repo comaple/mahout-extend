@@ -30,7 +30,7 @@ filemanage,
 terminal
 FROM ksckd.kp_userpreference WHERE day=${dt} GROUP BY uid, wfile_count,download,filemanage,terminal"
 echo "$sql"
-#hive -e "$sql" > $VALUE_FILE_PATH
+hive -e "$sql" > $VALUE_FILE_PATH
 ################################################################
 ### process data from hive 
 ### process data to fit the use for the model training 
@@ -51,6 +51,4 @@ echo -e "move the file :\n$VALUE_FILE_BUCKET \nTO \n$BASE_DIR/model/data_process
 ## 将数据转移到模型目录 ./model/data_processed.txt
 mv $VALUE_FILE_BUCKET $BASE_DIR/model/data_processed.txt
 echo -e "success u can start to train the model...."
-
-
 
