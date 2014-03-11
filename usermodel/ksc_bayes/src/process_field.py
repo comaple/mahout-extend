@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-# Author : comaple.zhang
-# Create Time : 20140226
-# Usage: process_field.py  <in file> <out file> fieldindex length
+# coding : utf8
 # Output: out file processed bining 
 
 import sys

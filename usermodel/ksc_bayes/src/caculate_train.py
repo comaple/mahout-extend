@@ -10,7 +10,7 @@ import sys
 import os
 
 #fieldList={1:20,2:0.5,3:0.5,4:1,5:1}
-fieldList={1:20,2:1,3:1}
+fieldList={1:1,2:0.5,3:0.5,4:1}
 is_active=50
 
 def myformat(x):

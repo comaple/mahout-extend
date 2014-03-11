@@ -43,8 +43,8 @@ echo last_date : $last_date
 
 ########  计算wfile count
 sql="DROP TABLE IF EXISTS ksckd.tmp_wfile ;CREATE TABLE ksckd.tmp_wfile AS 
-SELECT '$begin_date',a.uid uid, IF(b.cnt IS NOT NULL,b.cnt,0)  wfile_count,a.terminal terminal,a.channel channel FROM
-(SELECT uid,terminal,channel FROM kp_regist WHERE day='$begin_date')a
+SELECT '$begin_date',a.uid uid, IF(b.cnt IS NOT NULL,b.cnt,0)  wfile_count,a.terminal terminal,a.registtype registtype,a.channel channel FROM
+(SELECT uid,terminal,channel,registtype FROM kp_regist WHERE day='$begin_date')a
 LEFT OUTER JOIN
 (SELECT uid,COUNT(1) cnt FROM 
 kp_pv 
@@ -55,8 +55,8 @@ echo "$sql"
 
 hive -e "$sql"
 sql="DROP TABLE IF EXISTS ksckd.tmp_loginfr ;CREATE TABLE ksckd.tmp_loginfr AS
-SELECT '$begin_date', a.uid uid,IF(b.day_c IS NOT NULL,b.day_c,0) day_c ,a.terminal terminal FROM
-(SELECT uid,terminal FROM kp_regist WHERE day='$begin_date' GROUP BY uid ,terminal)a
+SELECT '$begin_date', a.uid uid,IF(b.day_c IS NOT NULL,b.day_c,0) day_c ,a.terminal terminal,a.registtype registtype FROM
+(SELECT uid,terminal,registtype FROM kp_regist WHERE day='$begin_date' GROUP BY uid ,terminal)a
 LEFT OUTER JOIN
 (
 SELECT uid ,COUNT(DISTINCT substring(ctime_id,0,8)) day_c FROM kp_loginhistory
@@ -66,8 +66,8 @@ WHERE substring(ctime_id,0,8)  BETWEEN '$begin_1_date' AND '$last_4_date' GROUP 
 echo "$sql"
 hive -e "$sql"
 sql="DROP TABLE IF EXISTS ksckd.tmp_ret;CREATE TABLE ksckd.tmp_ret AS
-SELECT '$begin_date' ,a.uid uid,IF(b.uid IS NOT NULL,1,0) is_keep,a.terminal terminal FROM
-(SELECT uid ,terminal FROM kp_regist WHERE day = '$begin_date' )a
+SELECT '$begin_date' ,a.uid uid,IF(b.uid IS NOT NULL,1,0) is_keep,a.terminal terminal,a.registtype registtype FROM
+(SELECT uid ,terminal,registtype FROM kp_regist WHERE day = '$begin_date' )a
 LEFT OUTER JOIN
 (SELECT uid FROM kp_day_uid WHERE day BETWEEN '$begin_5_date' AND '$last_date')b
 ON a.uid=b.uid"
@@ -80,9 +80,10 @@ SELECT '$begin_date', a.uid,
 	      SUM(IF(b.fun in('requestDownloadKss','requestDownloadXL'),b.cnt,0)) download,
 	      SUM(IF(b.fun in('syncFile','metadata'),b.cnt,0)) filemanage,
 	      a.terminal terminal,
-	      a.channel channel
+	      a.channel channel,
+		  a.registtype registtype
  FROM
-(SELECT uid ,terminal,channel FROM kp_regist WHERE day='$begin_date')a
+(SELECT uid ,terminal,channel,registtype FROM kp_regist WHERE day='$begin_date')a
 LEFT OUTER JOIN
 (SELECT uid,COUNT(1) cnt,fun FROM 
 kp_pv 
@@ -94,8 +95,8 @@ echo ----------------- "$sql" ------------------
 hive -e "$sql"
 
 sql="INSERT OVERWRITE TABLE ksckd.kp_userpreference PARTITION (day=$begin_date)
-SELECT a.uid ,MAX(a.wfile_count),MAX(b.day_c),0,MAX(d.is_keep), MAX(e.account_info),MAX(e.download),MAX(e.upload),MAX(e.filemanage), a.terminal,a.channel  FROM
-(SELECT uid,wfile_count,terminal,channel FROM ksckd.tmp_wfile GROUP BY uid,wfile_count,terminal,channel) a
+SELECT a.uid ,MAX(a.wfile_count),MAX(b.day_c),0,MAX(d.is_keep), MAX(e.account_info),MAX(e.download),MAX(e.upload),MAX(e.filemanage), a.terminal,a.channel ,a.registtype registtype  FROM
+(SELECT uid,wfile_count,terminal,channel,registtype FROM ksckd.tmp_wfile GROUP BY uid,wfile_count,terminal,channel,registtype) a
 JOIN
 (SELECT uid,day_c,terminal FROM ksckd.tmp_loginfr GROUP BY uid,day_c,terminal )b ON (a.uid=b.uid and a.terminal=b.terminal)
 JOIN

@@ -24,10 +24,11 @@ START_TIME=$(date +%s)
 
 ### extract data to hive table kp_userpreference
 echo begin to extract data to hive table ...
-sh $BASE_APP_PATH/src/user_preference.sh $date_4
+#sh $BASE_APP_PATH/src/user_preference.sh $date_4
 
 ### extract data from hive table kp_userpreference ,and preprocess the data for the usermodel's input
 echo begin to extract data from hive table to local file ...
+
 sh $BASE_APP_PATH/src/process_value.sh $date_4
 
 ### get the test data from the last step 
@@ -38,7 +39,7 @@ python $BASE_APP_PATH/src/split.py -i $BASE_APP_PATH/model/data_processed.txt  -
 echo begin to test data ... 
 python $BASE_APP_PATH/src/nb.py 2 $BASE_APP_PATH/model/data_test $BASE_APP_PATH/model/data_model $BASE_APP_PATH/model/data_result.txt
 
-cat $BASE_APP_PATH/model/data_result.txt | cut -f2,3,4,5,6 > $BASE_APP_PATH/model/data_hive_table.txt
+cat $BASE_APP_PATH/model/data_result.txt | cut -f2,3,4,5,6,7,8 > $BASE_APP_PATH/model/data_hive_table.txt
 ### load data into hive table
 
 hive -e "load data local inpath '$BASE_APP_PATH/model/data_hive_table.txt' overwrite into table ksckd.kp_usermodel partition (day=$date_4)"

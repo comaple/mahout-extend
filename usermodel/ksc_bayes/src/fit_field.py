@@ -1,13 +1,12 @@
 #!/user/bin/env python
 
-
-# Usage : to process the field to 归一化数据  which u give, fit_field.py <input file>
+# Usage : to process the field to [1-100] which u give, fit_field.py <input file>
 # Output : print the result to the console
 
 import sys
 import os
 
-fieldList={1:100,3:300,7:1000,8:1000}
+fieldList={1:3,2:2,3:1,4:5}
 
 def getData(filepath) :
 	data=[]
@@ -23,7 +22,7 @@ def getData(filepath) :
 		return None
 
 def main(argv) :
-	print "start......"
+#	print "start......"
 	if len(argv) < 2 :
 		print "please check u arguments input,please use like this : fit_field.py <input file>"
 		sys.exit(2)
@@ -38,7 +37,7 @@ def main(argv) :
 				else :
 					d[key]=str(field_value*100/field_max)
 		for dl in data :
-			print dl
+			print '\t'.join(dl)
 
 if __name__ == '__main__':
 	main(sys.argv)

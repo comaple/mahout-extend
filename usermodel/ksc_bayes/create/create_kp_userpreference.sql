@@ -11,7 +11,8 @@ download bigint,
 upload bigint,
 filemanage bigint,
 terminal string,
-channel string 
+channel string,
+registtype string
 )
 PARTITIONED BY(day int)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t" STORED AS RCFILE  LOCATION '/user/hive/warehouse/ksckd/kp_userpreference'
