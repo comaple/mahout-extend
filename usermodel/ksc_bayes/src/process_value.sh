@@ -32,9 +32,9 @@ download,
 filemanage,
 terminal,
 registtype
-FROM ksckd.kp_userpreference WHERE day=${dt} GROUP BY uid, wfile_count,download,filemanage,terminal,login_fr,user_ret"
+FROM ksckd.kp_userpreference WHERE day=${dt} GROUP BY uid, wfile_count,download,filemanage,terminal,login_fr,user_ret,registtype"
 echo "$sql"
-#hive -e "$sql" > $VALUE_FILE_PATH
+hive -e "$sql" > $VALUE_FILE_PATH
 ################################################################
 ### process data from hive 
 ### process data to fit the use for the model training 

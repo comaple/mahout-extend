@@ -56,7 +56,7 @@ echo "$sql"
 hive -e "$sql"
 sql="DROP TABLE IF EXISTS ksckd.tmp_loginfr ;CREATE TABLE ksckd.tmp_loginfr AS
 SELECT '$begin_date', a.uid uid,IF(b.day_c IS NOT NULL,b.day_c,0) day_c ,a.terminal terminal,a.registtype registtype FROM
-(SELECT uid,terminal,registtype FROM kp_regist WHERE day='$begin_date' GROUP BY uid ,terminal)a
+(SELECT uid,terminal,registtype FROM kp_regist WHERE day='$begin_date' GROUP BY uid ,terminal,registtype)a
 LEFT OUTER JOIN
 (
 SELECT uid ,COUNT(DISTINCT substring(ctime_id,0,8)) day_c FROM kp_loginhistory
@@ -89,7 +89,7 @@ LEFT OUTER JOIN
 kp_pv 
 WHERE fun in ('requestDownloadKss','requestDownloadXL','syncFile','metadata')
 and day BETWEEN '$begin_1_date' AND '$last_date' GROUP BY uid ,fun
-)b ON a.uid=b.uid GROUP BY a.uid ,a.terminal,a.channel"
+)b ON a.uid=b.uid GROUP BY a.uid ,a.terminal,a.channel,a.registtype"
 
 echo ----------------- "$sql" ------------------
 hive -e "$sql"
@@ -102,7 +102,7 @@ JOIN
 JOIN
 (SELECT uid,is_keep,terminal FROM ksckd.tmp_ret GROUP BY uid, is_keep ,terminal) d ON (a.uid=d.uid and a.terminal=d.terminal) 
 JOIN
-(SELECT uid ,0 account_info,0 upload,download,filemanage,terminal FROM ksckd.tmp_keyfun GROUP BY uid,filemanage,terminal,download) e ON (a.uid=e.uid and a.terminal=e.terminal) GROUP BY a.uid ,a.terminal,a.channel"
+(SELECT uid ,0 account_info,0 upload,download,filemanage,terminal FROM ksckd.tmp_keyfun GROUP BY uid,filemanage,terminal,download) e ON (a.uid=e.uid and a.terminal=e.terminal) GROUP BY a.uid ,a.terminal,a.channel,a.registtype"
 
 echo "$sql"
 

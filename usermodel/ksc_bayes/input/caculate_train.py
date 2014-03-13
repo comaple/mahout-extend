@@ -8,9 +8,9 @@ import sys
 import os
 
 #fieldList={1:20,2:1,3:1,4:1,5:1}
-fieldList={1:1,2:1,3:0.6,4:1}
+fieldList={1:1,2:0.5,3:0.5,4:1}
 #statistic={1:"0-1",2:"1-20",3:"20-25",4:"25-50",5:"50-75",6:"75-100",7:"100-125",8:"125-150",9:"150-175",10:"175-200",11:"200-250",12:"250-300",13:"300-max"}
-statistic={1:"0-1",2:"1-20",3:"20-25",4:"25-50",5:"50-75",6:"75-100",7:"100-125",8:"125-150",9:"150-175",10:"175-200",11:"200-250",12:"250-300",13:"300-max",14:"100-max"}
+statistic={1:"0-1",2:"1-20",3:"20-25",4:"25-50",5:"50-75",6:"75-100",7:"100-125",8:"125-150",9:"150-175",10:"175-200",11:"200-250",12:"250-300",13:"300-max"}
 statistics=True
 is_active=100
 
@@ -58,15 +58,18 @@ def main(argv) :
 					if float(value) >= min  and  float(value) < max :
 						v = result.get(skey) + 1
 						result[skey] = v	
-		#	d.append(value)
-			if float(value) >= is_active :
-				d[0] = 'T'
-			else :
-				d[0] = 'F'
+			d.append(value)
+	#		if float(value) >= is_active :
+	#			d[0] = 'T'
+	#		else :
+	#			d[0] = 'F'
 #		for dl in data :
 #			print '\t'.join(dl)
 		if statistics is True :
 			for r in result.keys() :
 				print str(statistic[r]) + "\t" + str(result.get(r))
+		else :
+			for dl in data :
+				print '\t'.join(dl)
 if __name__ == '__main__':
 	main(sys.argv)
