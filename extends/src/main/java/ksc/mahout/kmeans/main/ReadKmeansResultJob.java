@@ -36,7 +36,7 @@ public class ReadKmeansResultJob extends AbstractJob {
 
     private int runMapReduce() throws Exception {
         HadoopUtil.delete(getConf(), getInputPath());
-
+        // read kmeans items from the result of the mahout
         Job readKmeansItemsJob = prepareJob(getInputPath(),
                 getOutputPath(),
                 SequenceFileInputFormat.class,
@@ -45,8 +45,9 @@ public class ReadKmeansResultJob extends AbstractJob {
                 Text.class,
                 TextOutputFormat.class,
                 JOB_NAME);
-        boolean isComplete = readKmeansItemsJob.waitForCompletion(true);
+        boolean isComplete_Items = readKmeansItemsJob.waitForCompletion(true);
 
+        // read the result from the mahout kmeans
         Job readKResultJob = prepareJob(getInputPath(),
                 getOutputPath(),
                 SequenceFileInputFormat.class,
@@ -55,13 +56,13 @@ public class ReadKmeansResultJob extends AbstractJob {
                 Text.class,
                 TextOutputFormat.class,
                 JOB_NAME);
-
-        if (isComplete) {
-
+        boolean isComplete_Result = false;
+        if (isComplete_Items) {
+            isComplete_Result = readKResultJob.waitForCompletion(true);
         }
-        return 0;
+        // is complete the read result successful
+        return isComplete_Items && isComplete_Result ? 1 : 0;
     }
-
 
     private void addOptions() {
         addInputOption();
