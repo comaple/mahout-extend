@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/repos/asf/!svn/ver/1524116/mahout/trunk/core/src/test/java/org/apache/mahout/clustering/streaming/cluster
+END
+DataUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/repos/asf/!svn/ver/1524116/mahout/trunk/core/src/test/java/org/apache/mahout/clustering/streaming/cluster/DataUtils.java
+END
+StreamingKMeansTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/repos/asf/!svn/ver/1524116/mahout/trunk/core/src/test/java/org/apache/mahout/clustering/streaming/cluster/StreamingKMeansTest.java
+END
+BallKMeansTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/repos/asf/!svn/ver/1524116/mahout/trunk/core/src/test/java/org/apache/mahout/clustering/streaming/cluster/BallKMeansTest.java
+END

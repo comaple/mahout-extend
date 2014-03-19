@@ -1,0 +1,16 @@
+.classpath
+.project
+.settings/
+.idea/*
+*.iml
+target/
+examples/bin/tmp
+output
+core/build/
+core/input/
+core/output/
+core/testdata/
+core/temp
+temp
+foo
+math-tests/

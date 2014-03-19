@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/repos/asf/!svn/ver/1523901/mahout/trunk/core/src/main/java/org/apache/mahout/cf/taste/hadoop/als
+END
+PredictionMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/repos/asf/!svn/ver/1495738/mahout/trunk/core/src/main/java/org/apache/mahout/cf/taste/hadoop/als/PredictionMapper.java
+END
+DatasetSplitter.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/repos/asf/!svn/ver/1434865/mahout/trunk/core/src/main/java/org/apache/mahout/cf/taste/hadoop/als/DatasetSplitter.java
+END
+SharingMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/repos/asf/!svn/ver/1489707/mahout/trunk/core/src/main/java/org/apache/mahout/cf/taste/hadoop/als/SharingMapper.java
+END
+MultithreadedSharingMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/asf/!svn/ver/1523901/mahout/trunk/core/src/main/java/org/apache/mahout/cf/taste/hadoop/als/MultithreadedSharingMapper.java
+END
+SolveImplicitFeedbackMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/repos/asf/!svn/ver/1489707/mahout/trunk/core/src/main/java/org/apache/mahout/cf/taste/hadoop/als/SolveImplicitFeedbackMapper.java
+END
+FactorizationEvaluator.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repos/asf/!svn/ver/1523062/mahout/trunk/core/src/main/java/org/apache/mahout/cf/taste/hadoop/als/FactorizationEvaluator.java
+END
+ParallelALSFactorizationJob.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/repos/asf/!svn/ver/1508302/mahout/trunk/core/src/main/java/org/apache/mahout/cf/taste/hadoop/als/ParallelALSFactorizationJob.java
+END
+SolveExplicitFeedbackMapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/repos/asf/!svn/ver/1489707/mahout/trunk/core/src/main/java/org/apache/mahout/cf/taste/hadoop/als/SolveExplicitFeedbackMapper.java
+END
+ALS.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/repos/asf/!svn/ver/1508302/mahout/trunk/core/src/main/java/org/apache/mahout/cf/taste/hadoop/als/ALS.java
+END
+RecommenderJob.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/repos/asf/!svn/ver/1490930/mahout/trunk/core/src/main/java/org/apache/mahout/cf/taste/hadoop/als/RecommenderJob.java
+END

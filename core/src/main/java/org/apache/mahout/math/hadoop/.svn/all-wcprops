@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/repos/asf/!svn/ver/1525203/mahout/trunk/core/src/main/java/org/apache/mahout/math/hadoop
+END
+TimesSquaredJob.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/repos/asf/!svn/ver/1491301/mahout/trunk/core/src/main/java/org/apache/mahout/math/hadoop/TimesSquaredJob.java
+END
+DistributedRowMatrix.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repos/asf/!svn/ver/1492424/mahout/trunk/core/src/main/java/org/apache/mahout/math/hadoop/DistributedRowMatrix.java
+END
+MatrixMultiplicationJob.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/repos/asf/!svn/ver/1486122/mahout/trunk/core/src/main/java/org/apache/mahout/math/hadoop/MatrixMultiplicationJob.java
+END
+MatrixColumnMeansJob.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repos/asf/!svn/ver/1495738/mahout/trunk/core/src/main/java/org/apache/mahout/math/hadoop/MatrixColumnMeansJob.java
+END
+TransposeJob.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/repos/asf/!svn/ver/1486122/mahout/trunk/core/src/main/java/org/apache/mahout/math/hadoop/TransposeJob.java
+END

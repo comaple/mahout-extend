@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/repos/asf/!svn/ver/1460623/mahout/trunk/core/src/main/java/org/apache/mahout/common/parameters
+END
+Parameter.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/repos/asf/!svn/ver/1460431/mahout/trunk/core/src/main/java/org/apache/mahout/common/parameters/Parameter.java
+END
+Parametered.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/asf/!svn/ver/984119/mahout/trunk/core/src/main/java/org/apache/mahout/common/parameters/Parametered.java
+END
+DoubleParameter.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/repos/asf/!svn/ver/1051836/mahout/trunk/core/src/main/java/org/apache/mahout/common/parameters/DoubleParameter.java
+END
+AbstractParameter.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/repos/asf/!svn/ver/1460431/mahout/trunk/core/src/main/java/org/apache/mahout/common/parameters/AbstractParameter.java
+END
+PathParameter.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/repos/asf/!svn/ver/952758/mahout/trunk/core/src/main/java/org/apache/mahout/common/parameters/PathParameter.java
+END
+ClassParameter.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/repos/asf/!svn/ver/952758/mahout/trunk/core/src/main/java/org/apache/mahout/common/parameters/ClassParameter.java
+END

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/repos/asf/!svn/ver/1525203/mahout/trunk/core/src/test/java/org/apache/mahout/math/neighborhood
+END
+LocalitySensitiveHashSearchTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/repos/asf/!svn/ver/1489707/mahout/trunk/core/src/test/java/org/apache/mahout/math/neighborhood/LocalitySensitiveHashSearchTest.java
+END
+SearchQualityTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/repos/asf/!svn/ver/1525203/mahout/trunk/core/src/test/java/org/apache/mahout/math/neighborhood/SearchQualityTest.java
+END
+SearchSanityTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/repos/asf/!svn/ver/1524173/mahout/trunk/core/src/test/java/org/apache/mahout/math/neighborhood/SearchSanityTest.java
+END
+LumpyData.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/repos/asf/!svn/ver/1479307/mahout/trunk/core/src/test/java/org/apache/mahout/math/neighborhood/LumpyData.java
+END
