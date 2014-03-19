@@ -517,46 +517,46 @@
           <artifactId>maven-resources-plugin</artifactId>
           <version>2.6</version>
         </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-eclipse-plugin</artifactId>
-          <version>2.9</version>
-          <configuration>
-            <outputDirectory>${eclipse.outputDirectory}</outputDirectory>
-            <buildcommands>
-              <java.lang.String>org.eclipse.jdt.core.javabuilder</java.lang.String>
-              <java.lang.String>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</java.lang.String>
-              <java.lang.String>net.sourceforge.pmd.eclipse.plugin.pmdBuilder</java.lang.String>
-            </buildcommands>
-            <projectnatures>
-              <nature>org.eclipse.jdt.core.javanature</nature>
-              <nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
-              <nature>net.sourceforge.pmd.eclipse.plugin.pmdNature</nature>
-            </projectnatures>
-            <additionalConfig>
-              <file>
-                <name>.checkstyle</name>
-                <location>/mahout-eclipse-checkstyle</location>
-              </file>
-              <file>
-                <name>.pmd</name>
-                <location>/mahout-eclipse-pmd</location>
-              </file>
-              <file>
-                <name>.ruleset</name>
-                <location>/mahout-pmd-ruleset.xml</location>
-              </file>
-            </additionalConfig>
-          </configuration>
-          <!-- the 'location' elements above refer to classpath -->
-          <dependencies>
-            <dependency>
-              <groupId>org.apache.mahout</groupId>
-              <artifactId>mahout-buildtools</artifactId>
-              <version>${project.version}</version>
-            </dependency>
-          </dependencies>
-        </plugin>
+        <!--<plugin>-->
+          <!--<groupId>org.apache.maven.plugins</groupId>-->
+          <!--<artifactId>maven-eclipse-plugin</artifactId>-->
+          <!--<version>2.9</version>-->
+          <!--<configuration>-->
+            <!--<outputDirectory>${eclipse.outputDirectory}</outputDirectory>-->
+            <!--<buildcommands>-->
+              <!--<java.lang.String>org.eclipse.jdt.core.javabuilder</java.lang.String>-->
+              <!--<java.lang.String>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</java.lang.String>-->
+              <!--<java.lang.String>net.sourceforge.pmd.eclipse.plugin.pmdBuilder</java.lang.String>-->
+            <!--</buildcommands>-->
+            <!--<projectnatures>-->
+              <!--<nature>org.eclipse.jdt.core.javanature</nature>-->
+              <!--<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>-->
+              <!--<nature>net.sourceforge.pmd.eclipse.plugin.pmdNature</nature>-->
+            <!--</projectnatures>-->
+            <!--<additionalConfig>-->
+              <!--<file>-->
+                <!--<name>.checkstyle</name>-->
+                <!--<location>/mahout-eclipse-checkstyle</location>-->
+              <!--</file>-->
+              <!--<file>-->
+                <!--<name>.pmd</name>-->
+                <!--<location>/mahout-eclipse-pmd</location>-->
+              <!--</file>-->
+              <!--<file>-->
+                <!--<name>.ruleset</name>-->
+                <!--<location>/mahout-pmd-ruleset.xml</location>-->
+              <!--</file>-->
+            <!--</additionalConfig>-->
+          <!--</configuration>-->
+          <!--&lt;!&ndash; the 'location' elements above refer to classpath &ndash;&gt;-->
+          <!--<dependencies>-->
+            <!--<dependency>-->
+              <!--<groupId>org.apache.mahout</groupId>-->
+              <!--<artifactId>mahout-buildtools</artifactId>-->
+              <!--<version>${project.version}</version>-->
+            <!--</dependency>-->
+          <!--</dependencies>-->
+        <!--</plugin>-->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
@@ -597,7 +597,7 @@
           <artifactId>maven-remote-resources-plugin</artifactId>
           <version>1.4</version>
           <configuration>
-            <skipTests>${skipTests}</skipTests>
+            <!--<skipTests>${skipTests}</skipTests>-->
             <appendedResourcesDirectory>./src/main/appended-resources</appendedResourcesDirectory>
             <resourceBundles>
               <resourceBundle>org.apache:apache-jar-resource-bundle:1.4</resourceBundle>
@@ -620,20 +620,20 @@
       </plugins>
     </pluginManagement>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
-          <forkCount>1.5C</forkCount>
-          <reuseForks>false</reuseForks>
-          <argLine>-Xmx512m</argLine>
-          <testFailureIgnore>false</testFailureIgnore>
-          <redirectTestOutputToFile>true</redirectTestOutputToFile>
-          <systemPropertyVariables>
-            <mahout.test.directory>${project.build.directory}</mahout.test.directory>
-          </systemPropertyVariables>
-        </configuration>
-      </plugin>
+      <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-surefire-plugin</artifactId>-->
+        <!--<configuration>-->
+          <!--<forkCount>1.5C</forkCount>-->
+          <!--<reuseForks>false</reuseForks>-->
+          <!--<argLine>-Xmx512m</argLine>-->
+          <!--<testFailureIgnore>false</testFailureIgnore>-->
+          <!--<redirectTestOutputToFile>true</redirectTestOutputToFile>-->
+          <!--<systemPropertyVariables>-->
+            <!--<mahout.test.directory>${project.build.directory}</mahout.test.directory>-->
+          <!--</systemPropertyVariables>-->
+        <!--</configuration>-->
+      <!--</plugin>-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-remote-resources-plugin</artifactId>
@@ -764,6 +764,7 @@
     <module>integration</module>
     <module>examples</module>
     <module>distribution</module>
+      <module>extends</module>
   </modules>
   <profiles>
     <profile>
@@ -827,19 +828,19 @@
               </execution>
             </executions>
           </plugin>
-          <plugin>
-            <inherited>true</inherited>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.4</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
+          <!--<plugin>-->
+            <!--<inherited>true</inherited>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-gpg-plugin</artifactId>-->
+            <!--<version>1.4</version>-->
+            <!--<executions>-->
+              <!--<execution>-->
+                <!--<goals>-->
+                  <!--<goal>sign</goal>-->
+                <!--</goals>-->
+              <!--</execution>-->
+            <!--</executions>-->
+          <!--</plugin>-->
         </plugins>
       </build>
     </profile>
@@ -847,15 +848,15 @@
       <id>sourcecheck</id>
       <build>
         <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-              <showDeprecation>true</showDeprecation>
-              <showWarnings>true</showWarnings>
-              <compilerArgument>${compile.flags}</compilerArgument>
-            </configuration>
-          </plugin>
+          <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-compiler-plugin</artifactId>-->
+            <!--<configuration>-->
+              <!--<showDeprecation>true</showDeprecation>-->
+              <!--<showWarnings>true</showWarnings>-->
+              <!--<compilerArgument>${compile.flags}</compilerArgument>-->
+            <!--</configuration>-->
+          <!--</plugin>-->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-checkstyle-plugin</artifactId>
@@ -920,22 +921,22 @@
       <id>setup.eclipse</id>
       <build>
         <defaultGoal>process-test-sources</defaultGoal>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-eclipse-plugin</artifactId>
-            <version>2.9</version>
-            <executions>
-              <execution>
-                <id>setup.eclipse.project</id>
-                <phase>process-test-sources</phase>
-                <goals>
-                  <goal>eclipse</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
+        <!--<plugins>-->
+          <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-eclipse-plugin</artifactId>-->
+            <!--<version>2.9</version>-->
+            <!--<executions>-->
+              <!--<execution>-->
+                <!--<id>setup.eclipse.project</id>-->
+                <!--<phase>process-test-sources</phase>-->
+                <!--<goals>-->
+                  <!--<goal>eclipse</goal>-->
+                <!--</goals>-->
+              <!--</execution>-->
+            <!--</executions>-->
+          <!--</plugin>-->
+        <!--</plugins>-->
       </build>
     </profile>
     <profile>
@@ -982,11 +983,11 @@
   <reporting>
     <plugins>
       <!-- surefire runs unit tests -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>${msurefire.version}</version>
-      </plugin>
+      <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-surefire-report-plugin</artifactId>-->
+        <!--<version>${msurefire.version}</version>-->
+      <!--</plugin>-->
       <!-- checkstyle -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -1034,17 +1035,17 @@
         </configuration>
       </plugin>
       <!-- catch code tags -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>taglist-maven-plugin</artifactId>
-        <version>2.4</version>
-        <configuration>
-          <tags>
-            <tag>TODO</tag>
-            <tag>todo</tag>
-          </tags>
-        </configuration>
-      </plugin>
+      <!--<plugin>-->
+        <!--<groupId>org.codehaus.mojo</groupId>-->
+        <!--<artifactId>taglist-maven-plugin</artifactId>-->
+        <!--<version>2.4</version>-->
+        <!--<configuration>-->
+          <!--<tags>-->
+            <!--<tag>TODO</tag>-->
+            <!--<tag>todo</tag>-->
+          <!--</tags>-->
+        <!--</configuration>-->
+      <!--</plugin>-->
       <!-- findbugs -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -1062,43 +1063,43 @@
           <excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-changes-plugin</artifactId>
-        <version>2.9</version>
-        <configuration>
-          <onlyCurrentVersion>true</onlyCurrentVersion>
-          <columnNames>Type,Key,Summary,Status,Resolution,Assignee</columnNames>
-          <sortColumnNames>Type,Key</sortColumnNames>
-        </configuration>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>jira-report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.7</version>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>index</report>
-              <report>dependencies</report>
-              <report>dependency-convergence</report>
-              <report>dependency-management</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>taglist-maven-plugin</artifactId>
-        <version>2.4</version>
-      </plugin>
+      <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-changes-plugin</artifactId>-->
+        <!--<version>2.9</version>-->
+        <!--<configuration>-->
+          <!--<onlyCurrentVersion>true</onlyCurrentVersion>-->
+          <!--<columnNames>Type,Key,Summary,Status,Resolution,Assignee</columnNames>-->
+          <!--<sortColumnNames>Type,Key</sortColumnNames>-->
+        <!--</configuration>-->
+        <!--<reportSets>-->
+          <!--<reportSet>-->
+            <!--<reports>-->
+              <!--<report>jira-report</report>-->
+            <!--</reports>-->
+          <!--</reportSet>-->
+        <!--</reportSets>-->
+      <!--</plugin>-->
+      <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-project-info-reports-plugin</artifactId>-->
+        <!--<version>2.7</version>-->
+        <!--<reportSets>-->
+          <!--<reportSet>-->
+            <!--<reports>-->
+              <!--<report>index</report>-->
+              <!--<report>dependencies</report>-->
+              <!--<report>dependency-convergence</report>-->
+              <!--<report>dependency-management</report>-->
+            <!--</reports>-->
+          <!--</reportSet>-->
+        <!--</reportSets>-->
+      <!--</plugin>-->
+      <!--<plugin>-->
+        <!--<groupId>org.codehaus.mojo</groupId>-->
+        <!--<artifactId>taglist-maven-plugin</artifactId>-->
+        <!--<version>2.4</version>-->
+      <!--</plugin>-->
     </plugins>
   </reporting>
 </project>
