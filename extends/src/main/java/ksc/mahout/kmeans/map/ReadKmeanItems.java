@@ -27,7 +27,7 @@ public class ReadKmeanItems extends Mapper<IntWritable, WeightedVectorWritable, 
 
     @Override
     protected void map(IntWritable key, WeightedVectorWritable value, Context context) throws IOException, InterruptedException {
-        System.err.println(value.getVector().toString());
+//        System.err.println(value.getVector().toString());
         String vector = value.getVector().toString().replace("{", "").replace("}", "");
         // index : value
         String[] vlist = vector.split(",");
