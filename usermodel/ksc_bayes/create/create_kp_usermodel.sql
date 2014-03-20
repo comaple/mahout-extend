@@ -2,8 +2,9 @@ DROP TABLE IF EXISTS ksckd.kp_usermodel;
 CREATE EXTERNAL TABLE ksckd.kp_usermodel
 (
 wfile_count bigint,
+login_fr bigint,
+user_ret bigint,
 download bigint,
-filemanage bigint,
 uid bigint,
 is_user int
 )

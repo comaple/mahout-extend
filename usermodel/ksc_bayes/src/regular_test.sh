@@ -18,7 +18,9 @@ else
 		date_3=`/data/dw/script/utils/dateprocess.pl format yyyy-mm-dd $1`
 		date_4=`/data/dw/script/utils/dateprocess.pl format yyyymmdd $1`
 fi
-BASE_APP_PATH=$(dirname $(pwd))
+#BASE_APP_PATH=$(dirname $(pwd))
+BASE_APP_PATH=/data/ksckd/usermodel/ksc_bayes
+HIVE_LIB=/usr/local/hive/bin
 
 START_TIME=$(date +%s)
 
@@ -42,7 +44,7 @@ python $BASE_APP_PATH/src/nb.py 2 $BASE_APP_PATH/model/data_test $BASE_APP_PATH/
 cat $BASE_APP_PATH/model/data_result.txt | cut -f2,3,4,5,6,7,8 > $BASE_APP_PATH/model/data_hive_table.txt
 ### load data into hive table
 
-hive -e "load data local inpath '$BASE_APP_PATH/model/data_hive_table.txt' overwrite into table ksckd.kp_usermodel partition (day=$date_4)"
+$HIVE_LIB/hive -e "load data local inpath '$BASE_APP_PATH/model/data_hive_table.txt' overwrite into table ksckd.kp_usermodel partition (day=$date_4)"
 
 END_TIME=$(date +%s)
 
