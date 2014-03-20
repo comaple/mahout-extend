@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- 小日志文件 -->
+    <appender name="logConsole" class="org.apache.log4j.ConsoleAppender">
+        <!--<param name="File" value="/export/home/tomcat/logs/client/acc.log"/>-->
+        <param name="Append" value="true"/>
+        <!--<param name="DatePattern" value="'-'yyyyMMddHHmm"/>-->
+        <!--<param name="DatePattern" value="'-'yyyyMMddHH"/>-->
+        <layout class="org.apache.log4j.PatternLayout">
+            <!--  <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %p - %m |||| %l%n"/> -->
+            <param name="ConversionPattern" value="%m%n"/>
+        </layout>
+    </appender>
+
+
+
+    <!--<logger name="com.ksc">-->
+    <!--<priority value="INFO"/>-->
+    <!--<appender-ref ref="LogFile"/>-->
+    <!--</logger>-->
+
+
+
+    <logger name="logConsole">
+        <level value="INFO"/>
+        <appender-ref ref="logConsole"/>
+    </logger>
+
+    <root>
+    <priority value="INFO"/>
+    <appender-ref ref="logConsole"/>
+    </root>
+
+</log4j:configuration>

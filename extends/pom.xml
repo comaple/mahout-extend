@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>extends</artifactId>
-
+    <name>Mahout Extends</name>
     <properties>
         <main.bayes>ksc.mahout.bayes.main.SeqFromTextFile</main.bayes>
         <main.kmeans>ksc.mahout.kmeans.main.ReadKmeansResultJob</main.kmeans>
@@ -22,6 +22,12 @@
             <groupId>org.apache.mahout</groupId>
             <artifactId>mahout-core</artifactId>
             <version>${mahout.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.mrunit</groupId>
+            <artifactId>mrunit</artifactId>
+            <version>0.9.0-incubating</version>
+            <classifier>hadoop1</classifier>
         </dependency>
     </dependencies>
 
@@ -36,9 +42,12 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>ksc.mahout.bayes.main.SeqFromTextFile</mainClass>
+                            <mainClass>${main.kmeans}</mainClass>
+
                         </manifest>
+
                     </archive>
+                    <finalName>ReadKmeans</finalName>
                 </configuration>
                 <executions>
                     <execution>
