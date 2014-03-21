@@ -18,6 +18,10 @@ org.apache.mahout.utils.ConcatenateVectorsJob = concatmatrices : Concatenates 2 
 org.apache.mahout.clustering.streaming.tools.ResplitSequenceFiles = resplit : Splits a set of SequenceFiles into a number of equal splits
 org.apache.mahout.clustering.streaming.tools.ClusterQualitySummarizer = qualcluster : Runs clustering experiments and summarizes results in a CSV
 
+#Define By Myself
+ksc.mahout.kmeans.main.ReadKmeansResultJob = kmeans2hive : Read the result of the kmeans algorithm ,and transform the result to TEXT format and mv it to hive table
+
+
 #Math
 org.apache.mahout.math.hadoop.TransposeJob = transpose : Take the transpose of a matrix
 org.apache.mahout.math.hadoop.MatrixMultiplicationJob = matrixmult : Take the product of two matrices
@@ -66,3 +70,6 @@ trainclassifier = deprecated : Try the new vector backed naivebayes classifier s
 testclassifier = deprecated : Try the new vector backed naivebayes classifier see examples/bin/classify-20newsgroups.sh 
 lda = deprecated : Try the new Collapsed Variation Bayes LDA, try bin/mahout cvb or bin/mahout cvb0_local
 ldatopics = deprecated : Try the new Collapsed Variation Bayes LDA, try bin/mahout cvb or bin/mahout cvb0_local
+
+
+
