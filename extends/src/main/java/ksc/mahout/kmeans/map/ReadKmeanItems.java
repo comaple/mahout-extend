@@ -75,6 +75,7 @@ public class ReadKmeanItems extends Mapper<IntWritable, WeightedVectorWritable, 
         return stringBuilder.toString().trim();
     }
 
+    // test
     public static void main(String[] args) {
         String[] vlist = new String[]{"2:133"
                 , "4:245"
