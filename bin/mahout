@@ -189,9 +189,11 @@ MAHOUT_OPTS="$MAHOUT_OPTS -Dmapred.map.child.java.opts=-Xmx4096m"
 MAHOUT_OPTS="$MAHOUT_OPTS -Dmapred.reduce.child.java.opts=-Xmx4096m"
 MAHOUT_OPTS="$MAHOUT_OPTS -Dmapred.output.compress=true"
 MAHOUT_OPTS="$MAHOUT_OPTS -Dmapred.compress.map.output=true"
-MAHOUT_OPTS="$MAHOUT_OPTS -Dmapred.map.tasks=1"
-MAHOUT_OPTS="$MAHOUT_OPTS -Dmapred.reduce.tasks=1"
+MAHOUT_OPTS="$MAHOUT_OPTS -Dmapred.map.tasks=10"
+MAHOUT_OPTS="$MAHOUT_OPTS -Dmapred.reduce.tasks=5"
+## merge file 每次合并30个文件
 MAHOUT_OPTS="$MAHOUT_OPTS -Dio.sort.factor=30"
+## map output use buffer size ,当高于这个设置时就出发一次排序，并写到硬盘形成一个 spill file
 MAHOUT_OPTS="$MAHOUT_OPTS -Dio.sort.mb=1024"
 MAHOUT_OPTS="$MAHOUT_OPTS -Dio.file.buffer.size=32786"
 
@@ -247,7 +249,8 @@ else
     (*)
       echo "MAHOUT-JOB: $MAHOUT_JOB"
       export HADOOP_CLASSPATH=$MAHOUT_CONF_DIR:${HADOOP_CLASSPATH}
-      exec "$HADOOP_BINARY" jar $MAHOUT_JOB $CLASS "$@"
+	  echo ----------- "$HADOOP_BINARY" jar $MAHOUT_JOB $CLASS "$@"
+	  exec "$HADOOP_BINARY" jar $MAHOUT_JOB $CLASS "$@"
     esac
   fi
 fi
