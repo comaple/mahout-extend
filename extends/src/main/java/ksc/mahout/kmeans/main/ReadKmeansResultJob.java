@@ -43,9 +43,17 @@ public class ReadKmeansResultJob extends AbstractJob {
     }
 
     private int runMapReduce() throws Exception {
+        // set the input dir name
         String inputKmeanItemsPath = "clusteredPoints";
+        // delete the output path because hadoop ask the output dir must not exist
         HadoopUtil.delete(getConf(), getOutputPath());
+
+        /**
+         *   get the k parameter from the user give from command line ,
+         *   used to decide how many field the result data contained
+         */
         int k = Integer.parseInt(getOption(Constant.KMEANS_KCLASS));
+        // concatenate the input path of the state-I
         Path inputKmeansFinalPath = new Path(getInputPath().toString() + Path.SEPARATOR + inputKmeanItemsPath);
         // read kmeans items from the result of the mahout
         Job readKmeansItemsJob = prepareJob(inputKmeansFinalPath,
@@ -56,12 +64,18 @@ public class ReadKmeansResultJob extends AbstractJob {
                 Text.class,
                 TextOutputFormat.class,
                 JOB_NAME_1);
+        // set the map output result not use the compress
         readKmeansItemsJob.getConfiguration().set("mapred.output.compress", "false");
+        // set the k field num to configurations of u hadoop job
         readKmeansItemsJob.getConfiguration().setInt(Constant.KMEANS_KCLASS, k);
         boolean isComplete_Items = readKmeansItemsJob.waitForCompletion(true);
+        // set the result file of clusters
         String inputKResultPath = "clusters-*-final";
+        // concatenate the input path of the state-II
         Path inputKResultFinalPath = new Path(getInputPath().toString() + Path.SEPARATOR + inputKResultPath);
+        // get the output path parameters from the user input
         Path outputKResultFinalPath = new Path(getOption(KMEANS_RESULT));
+        // delete the output preprocess
         HadoopUtil.delete(getConf(), outputKResultFinalPath);
         // read the result from the mahout kmeans
         Job readKResultJob = prepareJob(inputKResultFinalPath,
@@ -82,6 +96,9 @@ public class ReadKmeansResultJob extends AbstractJob {
 
     }
 
+    /**
+     * add the command line parameters to the job
+     */
     private void addOptions() {
         addInputOption();
         addOutputOption();
