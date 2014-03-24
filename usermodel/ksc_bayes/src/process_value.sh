@@ -5,13 +5,16 @@
 ### Create Time : 20140221
 ####################################################
 
+
 ##### parse arguments
-if [ $# -eq 1 ]
+if [ "x"$1 = "x" ]
 then
-dt=$1
+      date_4=`/data/dw/script/utils/dateprocess.pl dateadd -8 yyyymmdd`
 else
-d=`/data/dw/script/utils/dateprocess.pl dateadd -8 yyyymmdd`
+      date_4=`/data/dw/script/utils/dateprocess.pl format yyyymmdd $1`
 fi
+
+dt=$date_4
 
 BASE_DIR=$(dirname $(pwd))
 VALUE_FILE_PATH=$BASE_DIR/input/kp_userpreference.txt

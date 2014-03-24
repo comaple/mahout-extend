@@ -7,6 +7,9 @@
 #############################################################
 
 
+RATE=$1
+shift
+
 if [ "x"$1 = "x" ]
 then
         date_1=`/data/dw/script/utils/dateprocess.pl dateadd -8 yyyymm/dd`
@@ -21,9 +24,6 @@ else
         date_4=`/data/dw/script/utils/dateprocess.pl format yyyymmdd $1`
 	shift
 fi
-
-
-RATE=$1
 
 DATE=$date_4
 BASE_APP_DIR=$(dirname $(pwd))
