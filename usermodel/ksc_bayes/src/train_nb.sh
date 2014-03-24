@@ -6,9 +6,26 @@
 ###			whitch extract from hive table kp_userpreference
 #############################################################
 
+
+if [ "x"$1 = "x" ]
+then
+        date_1=`/data/dw/script/utils/dateprocess.pl dateadd -8 yyyymm/dd`
+        date_2=`/data/dw/script/utils/dateprocess.pl dateadd -8 yyyy/mm/dd`
+        date_3=`/data/dw/script/utils/dateprocess.pl dateadd -8 yyyy-mm-dd`
+        date_4=`/data/dw/script/utils/dateprocess.pl dateadd -8 yyyymmdd`
+	shift
+else
+        date_1=`/data/dw/script/utils/dateprocess.pl format yyyymm/dd $1`
+        date_2=`/data/dw/script/utils/dateprocess.pl format yyyy/mm/dd $1`
+        date_3=`/data/dw/script/utils/dateprocess.pl format yyyy-mm-dd $1`
+        date_4=`/data/dw/script/utils/dateprocess.pl format yyyymmdd $1`
+	shift
+fi
+
+
 RATE=$1
 
-DATE=20140225
+DATE=$date_4
 BASE_APP_DIR=$(dirname $(pwd))
 
 sh process_value.sh $DATE

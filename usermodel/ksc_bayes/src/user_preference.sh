@@ -7,10 +7,10 @@
 
 if [ "x"$1 = "x" ]
 then
-        date_1=`/data/dw/script/utils/dateprocess.pl dateadd -1 yyyymm/dd`
-        date_2=`/data/dw/script/utils/dateprocess.pl dateadd -1 yyyy/mm/dd`
-        date_3=`/data/dw/script/utils/dateprocess.pl dateadd -1 yyyy-mm-dd`
-        date_4=`/data/dw/script/utils/dateprocess.pl dateadd -1 yyyymmdd`
+        date_1=`/data/dw/script/utils/dateprocess.pl dateadd -8 yyyymm/dd`
+        date_2=`/data/dw/script/utils/dateprocess.pl dateadd -8 yyyy/mm/dd`
+        date_3=`/data/dw/script/utils/dateprocess.pl dateadd -8 yyyy-mm-dd`
+        date_4=`/data/dw/script/utils/dateprocess.pl dateadd -8 yyyymmdd`
 else
         date_1=`/data/dw/script/utils/dateprocess.pl format yyyymm/dd $1`
         date_2=`/data/dw/script/utils/dateprocess.pl format yyyy/mm/dd $1`
@@ -40,6 +40,8 @@ last_4_date=`/data/dw/script/utils/dateprocess.pl dateadd 4 yyyymmdd $begin_date
 echo date_4 : $date_4
 echo begin_date : $begin_date
 echo last_date : $last_date
+echo begin_5_date : $begin_5_date
+echo last_4_date : $last_4_date
 
 ########  计算wfile count
 sql="DROP TABLE IF EXISTS ksckd.tmp_wfile ;CREATE TABLE ksckd.tmp_wfile AS 
