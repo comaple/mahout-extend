@@ -4,8 +4,6 @@ import ksc.mahout.util.Constant;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapred.OutputCollector;
-import org.apache.hadoop.mapred.Reporter;
 import org.apache.mahout.clustering.classify.WeightedVectorWritable;
 import org.apache.mahout.math.Arrays;
 import org.apache.mahout.math.DenseVector;
@@ -25,6 +23,15 @@ public class ReadKmeanItems extends Mapper<IntWritable, WeightedVectorWritable, 
         vectorLength = context.getConfiguration().getInt(Constant.KMEANS_KCLASS, 0);
     }
 
+    /**
+     * {"":"","":""}
+     *
+     * @param key
+     * @param value
+     * @param context
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     protected void map(IntWritable key, WeightedVectorWritable value, Context context) throws IOException, InterruptedException {
 //        System.err.println(value.getVector().toString());

@@ -132,7 +132,7 @@
     <dependencyManagement>
         <dependencies>
 
-            <!-- our modules -->
+                       <!-- our modules -->
 
             <dependency>
                 <artifactId>mahout-core</artifactId>

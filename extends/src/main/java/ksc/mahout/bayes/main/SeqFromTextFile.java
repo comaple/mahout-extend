@@ -34,6 +34,7 @@ public class SeqFromTextFile extends AbstractJob {
      */
     public static void main(String[] args) throws Exception {
         ToolRunner.run(new SeqFromTextFile(), args);
+
     }
 
     @Override

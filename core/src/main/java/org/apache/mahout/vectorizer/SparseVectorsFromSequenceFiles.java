@@ -340,6 +340,7 @@ public final class SparseVectorsFromSequenceFiles extends AbstractJob {
                   false,
                   reduceTasks);
         } else {
+
           HighDFWordsPruner.pruneVectors(tfDir,
                   prunedTFDir,
                   prunedPartialTFDir,

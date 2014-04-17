@@ -22,6 +22,7 @@ org.apache.mahout.clustering.streaming.tools.ClusterQualitySummarizer = qualclus
 ksc.mahout.kmeans.main.ReadKmeansResultJob = kmeans2hive : Read the result of the kmeans algorithm ,and transform the result to TEXT format and mv it to hive table
 
 
+
 #Math
 org.apache.mahout.math.hadoop.TransposeJob = transpose : Take the transpose of a matrix
 org.apache.mahout.math.hadoop.MatrixMultiplicationJob = matrixmult : Take the product of two matrices

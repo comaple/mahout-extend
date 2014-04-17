@@ -3,7 +3,11 @@ package ksc.mahout.kmeans.map;
 import org.apache.hadoop.hive.serde2.columnar.BytesRefArrayWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapred.JobConf;
+import org.apache.hadoop.mapred.Mapper;
+import org.apache.hadoop.mapred.OutputCollector;
+import org.apache.hadoop.mapred.Reporter;
+
 
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -12,12 +16,12 @@ import java.util.regex.Pattern;
  * Created by ZhangShengtao on 14-4-14.
  */
 
-public class ReadHiveMapper2 extends Mapper<LongWritable, BytesRefArrayWritable, Text, Text> {
+public class ReadHiveMapper2 implements Mapper<LongWritable, BytesRefArrayWritable, Text, Text> {
     private static final Pattern SPLAT_PATTERN = Pattern.compile("[,]");
 
-    @Override
-    protected void map(LongWritable key, BytesRefArrayWritable value, Context context) throws IOException, InterruptedException {
 
+    @Override
+    public void map(LongWritable key, BytesRefArrayWritable value, OutputCollector<Text, Text> output, Reporter reporter) throws IOException {
         int length = value.size();
         String field = null;
         StringBuilder stringBuilder = new StringBuilder();
@@ -33,7 +37,17 @@ public class ReadHiveMapper2 extends Mapper<LongWritable, BytesRefArrayWritable,
                     stringBuilder.append(token + " ");
                 }
             }
-            context.write(new Text(userid), new Text(stringBuilder.toString()));
+            output.collect(new Text(userid), new Text(stringBuilder.toString()));
         }
+    }
+
+    @Override
+    public void close() throws IOException {
+
+    }
+
+    @Override
+    public void configure(JobConf job) {
+
     }
 }

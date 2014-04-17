@@ -98,6 +98,7 @@ public final class InputDriver {
     job.setOutputKeyClass(Text.class);
     job.setOutputValueClass(VectorWritable.class);
     job.setOutputFormatClass(SequenceFileOutputFormat.class);
+
     job.setMapperClass(InputMapper.class);   
     job.setNumReduceTasks(0);
     job.setJarByClass(InputDriver.class);

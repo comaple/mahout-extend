@@ -13,7 +13,7 @@
     <name>Mahout Extends</name>
     <properties>
         <main.bayes>ksc.mahout.bayes.main.SeqFromTextFile</main.bayes>
-        <main.kmeans>ksc.mahout.kmeans.main.ReadKmeansResultJob</main.kmeans>
+        <main.kmeans>ksc.mahout.kmeans.main.ReadHiveAsSequenceFile</main.kmeans>
         <mahout.version>0.9-SNAPSHOT</mahout.version>
     </properties>
 
@@ -28,6 +28,11 @@
             <artifactId>mrunit</artifactId>
             <version>0.9.0-incubating</version>
             <classifier>hadoop1</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-exec</artifactId>
+            <version>0.10.0</version>
         </dependency>
     </dependencies>
 
@@ -47,7 +52,7 @@
                         </manifest>
 
                     </archive>
-                    <finalName>ReadKmeans</finalName>
+                    <finalName>TransFromHiveToText</finalName>
                 </configuration>
                 <executions>
                     <execution>
