@@ -2,17 +2,20 @@ package ksc.mahout.kmeans.main;
 
 import ksc.mahout.kmeans.map.ReadHiveMapper;
 import ksc.mahout.kmeans.map.ReadHiveMapper2;
-import ksc.mahout.kmeans.map.ReadVectorMapper;
 import ksc.mahout.kmeans.reduce.ReadHiveReducer;
 import ksc.mahout.kmeans.reduce.ReadHiveReducer2;
+import ksc.mahout.util.Constant;
+import org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore;
 import org.apache.hadoop.hive.ql.io.RCFileInputFormat;
+import org.apache.hadoop.hive.serde2.columnar.BytesRefArrayWritable;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
+
 import org.apache.hadoop.mapred.*;
-import org.apache.hadoop.mapred.FileInputFormat;
 import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.lib.input.*;
+
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
-import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
+
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 import org.apache.hadoop.util.ToolRunner;
 import org.apache.mahout.common.AbstractJob;
@@ -26,7 +29,7 @@ public class ReadHiveAsSequenceFile extends AbstractJob {
     public static String JOB_NAME = "TransFromHive2Seq-Job-State-I";
     public static String isRCFile = "isRCFile";
     public static String REDUCE_TASK = "reduce";
-    public static String TOTEXT = "toText";
+
 
     public static void main(String[] args) throws Exception {
         ToolRunner.run(new ReadHiveAsSequenceFile(), args);
@@ -47,11 +50,8 @@ public class ReadHiveAsSequenceFile extends AbstractJob {
     private int runMapReduce() throws Exception {
 
         int reduce_task = Integer.parseInt(getOption(REDUCE_TASK, "5"));
-        boolean toText = Boolean.parseBoolean(getOption(TOTEXT, "false"));
+
         boolean RCfile = Boolean.parseBoolean(getOption(isRCFile, "false"));
-        /**
-         * for the input file is rc file format
-         */
         if (RCfile) {
             JobConf jobconf = new JobConf(getConf());
             jobconf.setInputFormat(RCFileInputFormat.class);
@@ -68,10 +68,7 @@ public class ReadHiveAsSequenceFile extends AbstractJob {
             RunningJob job = JobClient.runJob(jobconf);
             job.waitForCompletion();
             return 0;
-            /**
-             * for the result file need the txt format
-             */
-        } else if (toText) {
+        }  else {
             Job readHiveAsSeqJob = prepareJob(getInputPath(),
                     getOutputPath(),
                     TextInputFormat.class,
@@ -86,21 +83,6 @@ public class ReadHiveAsSequenceFile extends AbstractJob {
             readHiveAsSeqJob.setNumReduceTasks(reduce_task);
             readHiveAsSeqJob.setJobName(JOB_NAME);
             return readHiveAsSeqJob.waitForCompletion(true) ? 0 : -1;
-            /**
-             * for the input file is lzo impress and txt format and the output file need sequence file
-             */
-        } else {
-            Job readHiveAsSeqJob = prepareJob(getInputPath(),
-                    getOutputPath(),
-                    org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat.class,
-                    ReadVectorMapper.class,
-                    Text.class,
-                    Text.class,
-                    TextOutputFormat.class,
-                    "");
-            readHiveAsSeqJob.setNumReduceTasks(reduce_task);
-            readHiveAsSeqJob.setJobName(JOB_NAME);
-            return readHiveAsSeqJob.waitForCompletion(true) ? 0 : -1;
         }
 
     }
@@ -110,8 +92,8 @@ public class ReadHiveAsSequenceFile extends AbstractJob {
         addInputOption();
         addOutputOption();
         addOption(DefaultOptionCreator.overwriteOption().create());
-        addOption(isRCFile, "rc", "is RCFile or not. default is false");
-        addOption(TOTEXT, "text", "is transform to text or not. default is false");
+        addOption(isRCFile, "rc", "is RCFile or not.");
+
     }
 
 }
