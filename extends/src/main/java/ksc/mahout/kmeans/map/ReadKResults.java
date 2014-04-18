@@ -17,7 +17,9 @@ public class ReadKResults extends Mapper<IntWritable, ClusterWritable, Text, Tex
         StringBuilder stringBuilder = new StringBuilder();
 
         int id = value.getValue().getId();
+
         String contant = value.getValue().toString();
+        value.getValue().getCenter().toString();
         stringBuilder.append(value.getValue().getNumObservations() + "\t");
         stringBuilder.append(value.getValue().getCenter() + "\t");
         stringBuilder.append(value.getValue().getRadius());

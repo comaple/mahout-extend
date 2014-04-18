@@ -94,6 +94,7 @@ public final class Job extends AbstractJob {
         }
         DistanceMeasure measure = ClassUtils.instantiateAs(measureClass, DistanceMeasure.class);
         boolean notPreparing = Boolean.parseBoolean(getOption(NOTPREPARING, "false"));
+        log.info("not need preparing is :" + notPreparing);
         if (hasOption(DefaultOptionCreator.NUM_CLUSTERS_OPTION)) {
             int k = Integer.parseInt(getOption(DefaultOptionCreator.NUM_CLUSTERS_OPTION));
             /**
@@ -130,7 +131,7 @@ public final class Job extends AbstractJob {
     public static void run(Configuration conf, Path input, Path output, DistanceMeasure measure, int k,
                            double convergenceDelta, int maxIterations) throws Exception {
         Path directoryContainingConvertedInput = new Path(output, DIRECTORY_CONTAINING_CONVERTED_INPUT);
-        log.info("Preparing Input");
+        log.info("Preparing Input--------------");
         InputDriver.runJob(input, directoryContainingConvertedInput, "org.apache.mahout.math.RandomAccessSparseVector");
         log.info("Running random seed to get initial clusters");
         Path clusters = new Path(output, "random-seeds");
