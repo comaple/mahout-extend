@@ -23,12 +23,12 @@
             <artifactId>mahout-core</artifactId>
             <version>${mahout.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.mrunit</groupId>
-            <artifactId>mrunit</artifactId>
-            <version>0.9.0-incubating</version>
-            <classifier>hadoop1</classifier>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.mrunit</groupId>-->
+            <!--<artifactId>mrunit</artifactId>-->
+            <!--<version>0.9.0-incubating</version>-->
+            <!--<classifier>hadoop1</classifier>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.apache.hive</groupId>
             <artifactId>hive-exec</artifactId>
