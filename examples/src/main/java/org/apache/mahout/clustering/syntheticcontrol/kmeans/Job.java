@@ -74,6 +74,7 @@ public final class Job extends AbstractJob {
         addOption(DefaultOptionCreator.convergenceOption().create());
         addOption(DefaultOptionCreator.maxIterationsOption().create());
         addOption(DefaultOptionCreator.overwriteOption().create());
+        System.out.println("add the argument np to the kmeans job.");
         addOption(NOTPREPARING, "np", "Is needed to preparing input data. default need (false)");
 
         Map<String, List<String>> argMap = parseArguments(args);
