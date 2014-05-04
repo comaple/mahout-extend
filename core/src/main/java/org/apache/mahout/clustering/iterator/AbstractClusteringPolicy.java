@@ -30,43 +30,49 @@ import org.apache.mahout.math.VectorWritable;
 import org.apache.mahout.math.function.TimesFunction;
 
 public abstract class AbstractClusteringPolicy implements ClusteringPolicy {
-  
-  @Override
-  public abstract void write(DataOutput out) throws IOException;
-  
-  @Override
-  public abstract void readFields(DataInput in) throws IOException;
-  
-  @Override
-  public Vector select(Vector probabilities) {
-    int maxValueIndex = probabilities.maxValueIndex();
-    Vector weights = new SequentialAccessSparseVector(probabilities.size());
-    weights.set(maxValueIndex, 1.0);
-    return weights;
-  }
-  
-  @Override
-  public void update(ClusterClassifier posterior) {
-    // nothing to do in general here
-  }
-  
-  @Override
-  public Vector classify(Vector data, ClusterClassifier prior) {
-    List<Cluster> models = prior.getModels();
-    int i = 0;
-    Vector pdfs = new DenseVector(models.size());
-    for (Cluster model : models) {
-      pdfs.set(i++, model.pdf(new VectorWritable(data)));
+
+    @Override
+    public abstract void write(DataOutput out) throws IOException;
+
+    @Override
+    public abstract void readFields(DataInput in) throws IOException;
+
+    @Override
+    public Vector select(Vector probabilities) {
+        int maxValueIndex = probabilities.maxValueIndex();
+        Vector weights = new SequentialAccessSparseVector(probabilities.size());
+        weights.set(maxValueIndex, 1.0);
+        return weights;
     }
-    return pdfs.assign(new TimesFunction(), 1.0 / pdfs.zSum());
-  }
-  
-  @Override
-  public void close(ClusterClassifier posterior) {
-    for (Cluster cluster : posterior.getModels()) {
-      cluster.computeParameters();
+
+    @Override
+    public void update(ClusterClassifier posterior) {
+        // nothing to do in general here
     }
-    
-  }
-  
+
+    @Override
+    public Vector classify(Vector data, ClusterClassifier prior) {
+        List<Cluster> models = prior.getModels();
+        int i = 0;
+        /**
+         * add by comaple.zhang
+         */
+        //定义一个向量 返回值类型
+        Vector pdfs = new DenseVector(models.size());
+        for (Cluster model : models) {
+            //对每一个模型计算一次距离，并加入到返回值向量中去
+            pdfs.set(i++, model.pdf(new VectorWritable(data)));
+        }
+        //对返回值向量去第一范式
+        return pdfs.assign(new TimesFunction(), 1.0 / pdfs.zSum());
+    }
+
+    @Override
+    public void close(ClusterClassifier posterior) {
+        for (Cluster cluster : posterior.getModels()) {
+            cluster.computeParameters();
+        }
+
+    }
+
 }
