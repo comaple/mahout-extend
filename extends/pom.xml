@@ -54,9 +54,7 @@
                     <archive>
                         <manifest>
                             <mainClass>${main.kmeans}</mainClass>
-
                         </manifest>
-
                     </archive>
                     <finalName>TransFromHiveToText</finalName>
                 </configuration>

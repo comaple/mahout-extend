@@ -2,6 +2,7 @@ package ksc.mahout.kmeans.reduce;
 
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.mahout.math.Vector;
 
 import java.io.IOException;
 
@@ -17,4 +18,6 @@ public class ReadHiveReducer extends Reducer<Text, Text, Text, Text> {
         }
         context.write(key, new Text(stringBuilder.toString()));
     }
+
+
 }

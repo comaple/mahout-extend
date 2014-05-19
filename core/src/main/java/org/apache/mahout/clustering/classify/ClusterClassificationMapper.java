@@ -91,7 +91,7 @@ public class ClusterClassificationMapper extends
                     int maxValueIndex = pdfPerCluster.maxValueIndex();
                     write(vw, context, maxValueIndex, 1.0);
                 } else {
-                    // 去所有在阈值之上的类
+                    // 去所有的
                     writeAllAboveThreshold(vw, context, pdfPerCluster);
                 }
             }
