@@ -1,4 +1,4 @@
-Welcome to Apache Mahout!
+Welcome to KSCKD Mahout!
 
 Mahout is a scalable machine learning library that implements many different
 approaches to machine learning.  The project currently contains
