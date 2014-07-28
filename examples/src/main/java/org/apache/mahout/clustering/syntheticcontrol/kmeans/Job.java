@@ -149,6 +149,19 @@ public final class Job extends AbstractJob {
         clusterDumper.printClusters(null);
     }
 
+    /**
+     * add by comaple.zhang
+     *
+     * @param conf
+     * @param input
+     * @param output
+     * @param measure
+     * @param k
+     * @param convergenceDelta
+     * @param maxIterations
+     * @param notPreparing
+     * @throws Exception
+     */
     public static void run(Configuration conf, Path input, Path output, DistanceMeasure measure, int k,
                            double convergenceDelta, int maxIterations, boolean notPreparing) throws Exception {
         Path directoryContainingConvertedInput = input;

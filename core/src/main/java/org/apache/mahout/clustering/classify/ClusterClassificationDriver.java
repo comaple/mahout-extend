@@ -53,58 +53,58 @@ import org.apache.mahout.math.VectorWritable;
  * algorithm.
  */
 public final class ClusterClassificationDriver extends AbstractJob {
-  
+
   /**
    * CLI to run Cluster Classification Driver.
    */
   @Override
   public int run(String[] args) throws Exception {
-    
+
     addInputOption();
     addOutputOption();
     addOption(DefaultOptionCreator.methodOption().create());
     addOption(DefaultOptionCreator.clustersInOption()
         .withDescription("The input centroids, as Vectors.  Must be a SequenceFile of Writable, Cluster/Canopy.")
         .create());
-    
+
     if (parseArguments(args) == null) {
       return -1;
     }
-    
+
     Path input = getInputPath();
     Path output = getOutputPath();
-    
+
     if (getConf() == null) {
       setConf(new Configuration());
     }
     Path clustersIn = new Path(getOption(DefaultOptionCreator.CLUSTERS_IN_OPTION));
     boolean runSequential = getOption(DefaultOptionCreator.METHOD_OPTION).equalsIgnoreCase(
         DefaultOptionCreator.SEQUENTIAL_METHOD);
-    
+
     double clusterClassificationThreshold = 0.0;
     if (hasOption(DefaultOptionCreator.OUTLIER_THRESHOLD)) {
       clusterClassificationThreshold = Double.parseDouble(getOption(DefaultOptionCreator.OUTLIER_THRESHOLD));
     }
-    
+
     run(getConf(), input, clustersIn, output, clusterClassificationThreshold, true, runSequential);
-    
+
     return 0;
   }
-  
+
   /**
    * Constructor to be used by the ToolRunner.
    */
   private ClusterClassificationDriver() {
   }
-  
+
   public static void main(String[] args) throws Exception {
     ToolRunner.run(new Configuration(), new ClusterClassificationDriver(), args);
   }
-  
+
   /**
    * Uses {@link ClusterClassifier} to classify input vectors into their
    * respective clusters.
-   * 
+   *
    * @param input
    *          the input vectors
    * @param clusteringOutputPath
@@ -136,21 +136,21 @@ public final class ClusterClassificationDriver extends AbstractJob {
     } else {
       classifyClusterMR(conf, input, clusteringOutputPath, output, clusterClassificationThreshold, emitMostLikely);
     }
-    
+
   }
-  
+
   private static void classifyClusterSeq(Configuration conf, Path input, Path clusters, Path output,
       Double clusterClassificationThreshold, boolean emitMostLikely) throws IOException {
     List<Cluster> clusterModels = populateClusterModels(clusters, conf);
     ClusteringPolicy policy = ClusterClassifier.readPolicy(finalClustersPath(conf, clusters));
     ClusterClassifier clusterClassifier = new ClusterClassifier(clusterModels, policy);
     selectCluster(input, clusterModels, clusterClassifier, output, clusterClassificationThreshold, emitMostLikely);
-    
+
   }
-  
+
   /**
    * Populates a list with clusters present in clusters-*-final directory.
-   * 
+   *
    * @param clusterOutputPath
    *          The output path of the clustering.
    * @param conf
@@ -171,16 +171,16 @@ public final class ClusterClassificationDriver extends AbstractJob {
     }
     return clusterModels;
   }
-  
+
   private static Path finalClustersPath(Configuration conf, Path clusterOutputPath) throws IOException {
     FileSystem fileSystem = clusterOutputPath.getFileSystem(conf);
     FileStatus[] clusterFiles = fileSystem.listStatus(clusterOutputPath, PathFilters.finalPartFilter());
     return clusterFiles[0].getPath();
   }
-  
+
   /**
    * Classifies the vector into its respective cluster.
-   * 
+   *
    * @param input
    *          the path containing the input vector.
    * @param clusterModels
@@ -208,7 +208,7 @@ public final class ClusterClassificationDriver extends AbstractJob {
     }
     writer.close();
   }
-  
+
   private static void classifyAndWrite(List<Cluster> clusterModels, Double clusterClassificationThreshold,
       boolean emitMostLikely, SequenceFile.Writer writer, VectorWritable vw, Vector pdfPerCluster) throws IOException {
     if (emitMostLikely) {
@@ -219,7 +219,7 @@ public final class ClusterClassificationDriver extends AbstractJob {
       writeAllAboveThreshold(clusterModels, clusterClassificationThreshold, writer, vw, pdfPerCluster);
     }
   }
-  
+
   private static void writeAllAboveThreshold(List<Cluster> clusterModels, Double clusterClassificationThreshold,
       SequenceFile.Writer writer, VectorWritable vw, Vector pdfPerCluster) throws IOException {
     for (Element pdf : pdfPerCluster.nonZeroes()) {
@@ -230,51 +230,51 @@ public final class ClusterClassificationDriver extends AbstractJob {
       }
     }
   }
-  
+
   private static void write(List<Cluster> clusterModels, SequenceFile.Writer writer, WeightedVectorWritable wvw,
       int maxValueIndex) throws IOException {
     Cluster cluster = clusterModels.get(maxValueIndex);
     writer.append(new IntWritable(cluster.getId()), wvw);
   }
-  
+
   /**
    * Decides whether the vector should be classified or not based on the max pdf
    * value of the clusters and threshold value.
-   * 
+   *
    * @return whether the vector should be classified or not.
    */
   private static boolean shouldClassify(Vector pdfPerCluster, Double clusterClassificationThreshold) {
     return pdfPerCluster.maxValue() >= clusterClassificationThreshold;
   }
-  
+
   private static void classifyClusterMR(Configuration conf, Path input, Path clustersIn, Path output,
       Double clusterClassificationThreshold, boolean emitMostLikely) throws IOException, InterruptedException,
       ClassNotFoundException {
-    
+
     conf.setFloat(ClusterClassificationConfigKeys.OUTLIER_REMOVAL_THRESHOLD,
                   clusterClassificationThreshold.floatValue());
     conf.setBoolean(ClusterClassificationConfigKeys.EMIT_MOST_LIKELY, emitMostLikely);
     conf.set(ClusterClassificationConfigKeys.CLUSTERS_IN, clustersIn.toUri().toString());
-    
+
     Job job = new Job(conf, "Cluster Classification Driver running over input: " + input);
     job.setJarByClass(ClusterClassificationDriver.class);
-    
+
     job.setInputFormatClass(SequenceFileInputFormat.class);
     job.setOutputFormatClass(SequenceFileOutputFormat.class);
-    
+
     job.setMapperClass(ClusterClassificationMapper.class);
     job.setNumReduceTasks(0);
-    
+
     job.setOutputKeyClass(IntWritable.class);
     job.setOutputValueClass(WeightedVectorWritable.class);
-    
+
     FileInputFormat.addInputPath(job, input);
     FileOutputFormat.setOutputPath(job, output);
     if (!job.waitForCompletion(true)) {
       throw new InterruptedException("Cluster Classification Driver Job failed processing " + input);
     }
   }
-  
+
   public static void run(Configuration conf, Path input, Path clusteringOutputPath, Path output,
       double clusterClassificationThreshold, boolean emitMostLikely, boolean runSequential) throws IOException,
       InterruptedException, ClassNotFoundException {
@@ -283,7 +283,7 @@ public final class ClusterClassificationDriver extends AbstractJob {
     } else {
       classifyClusterMR(conf, input, clusteringOutputPath, output, clusterClassificationThreshold, emitMostLikely);
     }
-    
+
   }
-  
+
 }

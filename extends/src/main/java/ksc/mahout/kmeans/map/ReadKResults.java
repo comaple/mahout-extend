@@ -15,9 +15,7 @@ public class ReadKResults extends Mapper<IntWritable, ClusterWritable, Text, Tex
     @Override
     protected void map(IntWritable key, ClusterWritable value, Context context) throws IOException, InterruptedException {
         StringBuilder stringBuilder = new StringBuilder();
-
         int id = value.getValue().getId();
-
         String contant = value.getValue().toString();
         value.getValue().getCenter().toString();
         stringBuilder.append(value.getValue().getNumObservations() + "\t");

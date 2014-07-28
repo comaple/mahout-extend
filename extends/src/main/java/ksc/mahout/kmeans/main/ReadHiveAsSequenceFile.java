@@ -7,6 +7,7 @@ import ksc.mahout.kmeans.reduce.ReadHiveReducer2;
 import ksc.mahout.util.Constant;
 import org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore;
 import org.apache.hadoop.hive.ql.io.RCFileInputFormat;
+import org.apache.hadoop.hive.ql.io.RCFileOutputFormat;
 import org.apache.hadoop.hive.serde2.columnar.BytesRefArrayWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -55,6 +56,7 @@ public class ReadHiveAsSequenceFile extends AbstractJob {
         if (RCfile) {
             JobConf jobconf = new JobConf(getConf());
             jobconf.setInputFormat(RCFileInputFormat.class);
+
             jobconf.setJarByClass(ReadHiveAsSequenceFile.class);
             jobconf.setMapperClass(ReadHiveMapper2.class);
             jobconf.setReducerClass(ReadHiveReducer2.class);
@@ -68,7 +70,7 @@ public class ReadHiveAsSequenceFile extends AbstractJob {
             RunningJob job = JobClient.runJob(jobconf);
             job.waitForCompletion();
             return 0;
-        }  else {
+        } else {
             Job readHiveAsSeqJob = prepareJob(getInputPath(),
                     getOutputPath(),
                     TextInputFormat.class,
@@ -80,6 +82,7 @@ public class ReadHiveAsSequenceFile extends AbstractJob {
                     Text.class,
                     SequenceFileOutputFormat.class
             );
+
             readHiveAsSeqJob.setNumReduceTasks(reduce_task);
             readHiveAsSeqJob.setJobName(JOB_NAME);
             return readHiveAsSeqJob.waitForCompletion(true) ? 0 : -1;
