@@ -248,7 +248,7 @@ else
       ;;
     (*)
       echo "MAHOUT-JOB: $MAHOUT_JOB"
-      export HADOOP_CLASSPATH=$MAHOUT_CONF_DIR:${HADOOP_CLASSPATH}
+      export HADOOP_CLASSPATH=$MAHOUT_CONF_DIR:${HADOOP_CLASSPATH}:$CLASSPATH      :
 	  echo ----------- "$HADOOP_BINARY" jar $MAHOUT_JOB $CLASS "$@"
 	  exec "$HADOOP_BINARY" jar $MAHOUT_JOB $CLASS "$@"
     esac
