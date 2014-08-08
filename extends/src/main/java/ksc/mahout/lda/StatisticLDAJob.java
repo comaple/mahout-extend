@@ -68,7 +68,7 @@ public class StatisticLDAJob extends AbstractJob {
         FileOutputFormat.setOutputPath(ldaParseJob, output);
         MultipleInputs.addInputPath(ldaParseJob, input, SequenceFileInputFormat.class, LDADocMapper.class);
         MultipleInputs.addInputPath(ldaParseJob, matrix, SequenceFileInputFormat.class, MatrixMapper.class);
-
+        ldaParseJob.setJarByClass(StatisticLDAJob.class);
         boolean phrase_1 = ldaParseJob.waitForCompletion(true);
 
         Job statisticsJob = prepareJob(output, new Path(output.getParent(), ""), TextInputFormat.class, StatisticsTopicMapper.class, LongWritable.class, Text.class, StatisticsReducer.class, Text.class, Text.class, TextOutputFormat.class);
