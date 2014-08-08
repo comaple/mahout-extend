@@ -71,7 +71,7 @@ public class StatisticLDAJob extends AbstractJob {
         ldaParseJob.setJarByClass(StatisticLDAJob.class);
         boolean phrase_1 = ldaParseJob.waitForCompletion(true);
 
-        Job statisticsJob = prepareJob(output, new Path(output.getParent(), ""), TextInputFormat.class, StatisticsTopicMapper.class, LongWritable.class, Text.class, StatisticsReducer.class, Text.class, Text.class, TextOutputFormat.class);
+        Job statisticsJob = prepareJob(output, new Path(output.getParent(), "statistics_result"), TextInputFormat.class, StatisticsTopicMapper.class, LongWritable.class, Text.class, StatisticsReducer.class, Text.class, Text.class, TextOutputFormat.class);
         statisticsJob.setJobName("PARSE-LDA-JOB-II");
         boolean phrase_2 = statisticsJob.waitForCompletion(true);
         return phrase_1 && phrase_2 ? 0 : -1;

@@ -6,6 +6,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.mahout.math.DenseVector;
 import org.apache.mahout.math.VectorWritable;
 
 import java.io.IOException;
@@ -18,6 +19,6 @@ public class MatrixMapper extends Mapper<IntWritable, Text, Text, UidPrefWritabl
 
     @Override
     protected void map(IntWritable key, Text value, Context context) throws IOException, InterruptedException {
-        context.write(new Text(key.toString()), new UidPrefWritable(key.get(), Constant.FLAG_MATRIX, value.toString(), new VectorWritable()));
+        context.write(new Text(key.toString()), new UidPrefWritable(key.get(), Constant.FLAG_MATRIX, value.toString(), new VectorWritable(new DenseVector(new double[]{}))));
     }
 }
