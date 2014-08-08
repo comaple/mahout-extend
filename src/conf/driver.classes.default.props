@@ -20,7 +20,7 @@ org.apache.mahout.clustering.streaming.tools.ClusterQualitySummarizer = qualclus
 
 #Define By Myself
 ksc.mahout.kmeans.main.ReadKmeansResultJob = kmeans2hive : Read the result of the kmeans algorithm ,and transform the result to TEXT format and mv it to hive table
-ksc.mahout.lda.ParseLDAReducer = parselda : Read the result of the lda algorithm ,and transform the resul for statistics
+ksc.mahout.lda.StatisticLDAJob = parselda : Read the result of the lda algorithm ,and transform the resul for statistics
 
 
 #Math
