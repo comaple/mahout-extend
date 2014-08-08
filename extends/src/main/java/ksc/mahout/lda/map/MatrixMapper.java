@@ -2,6 +2,7 @@ package ksc.mahout.lda.map;
 
 import ksc.mahout.util.Constant;
 import ksc.mahout.writable.UidPrefWritable;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -12,11 +13,11 @@ import java.io.IOException;
 /**
  * Created by ZhangShengtao on 14-8-7.
  */
-public class MatrixMapper extends Mapper<LongWritable, Text, Text, UidPrefWritable> {
+public class MatrixMapper extends Mapper<IntWritable, Text, Text, UidPrefWritable> {
     private static String FLAG = "index";
 
     @Override
-    protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+    protected void map(IntWritable key, Text value, Context context) throws IOException, InterruptedException {
         context.write(new Text(key.toString()), new UidPrefWritable(key.get(), Constant.FLAG_MATRIX, value.toString(), null));
     }
 }

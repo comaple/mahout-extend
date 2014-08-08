@@ -58,9 +58,9 @@ public class StatisticLDAJob extends AbstractJob {
         int numReduce = Integer.parseInt(getOption(NUM_REDUCE));
         Job ldaParseJob = new Job(getConf());
         ldaParseJob.setReducerClass(ParseLDAReducer.class);
-        ldaParseJob.setMapOutputKeyClass(LongWritable.class);
+        ldaParseJob.setMapOutputKeyClass(Text.class);
         ldaParseJob.setMapOutputValueClass(UidPrefWritable.class);
-        ldaParseJob.setOutputKeyClass(LongWritable.class);
+        ldaParseJob.setOutputKeyClass(Text.class);
         ldaParseJob.setOutputValueClass(Text.class);
         ldaParseJob.setOutputFormatClass(SequenceFileOutputFormat.class);
         ldaParseJob.setNumReduceTasks(numReduce);
