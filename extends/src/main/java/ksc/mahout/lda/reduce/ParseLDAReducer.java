@@ -23,7 +23,7 @@ public class ParseLDAReducer extends Reducer<Text, UidPrefWritable, LongWritable
     protected void reduce(Text key, Iterable<UidPrefWritable> values, Context context) throws IOException, InterruptedException {
         String docId = key.toString();
         String userId = "";
-        VectorWritable vector = new VectorWritable();
+        Text vector = new Text();
         String vectorStr = "";
         for (UidPrefWritable uidPrefWritable : values) {
             if (uidPrefWritable.getFlage().equals(Constant.FLAG_DOC)) {

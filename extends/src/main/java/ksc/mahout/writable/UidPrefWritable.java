@@ -26,7 +26,7 @@ public class UidPrefWritable extends VarLongWritable {
     /**
      * used to store the doc vector
      */
-    private VectorWritable vectorWritable = new VectorWritable();
+    private Text vectorWritable = new Text();
 
     public UidPrefWritable() {
     }
@@ -35,11 +35,11 @@ public class UidPrefWritable extends VarLongWritable {
         set(uid);
     }
 
-    public UidPrefWritable(long uid, String flage, String uidValue, VectorWritable vector) {
+    public UidPrefWritable(long uid, String flage, String uidValue, Text vector) {
         set(uid);
         this.flage.set(flage);
         this.uidValue.set(uidValue);
-        this.vectorWritable.set(vector.get());
+        this.vectorWritable.set(vector);
     }
 
     @Override
@@ -74,11 +74,11 @@ public class UidPrefWritable extends VarLongWritable {
         this.uidValue = uidValue;
     }
 
-    public VectorWritable getVectorWritable() {
+    public Text getVectorWritable() {
         return vectorWritable;
     }
 
-    public void setVectorWritable(VectorWritable vectorWritable) {
+    public void setVectorWritable(Text vectorWritable) {
         this.vectorWritable = vectorWritable;
     }
 }
