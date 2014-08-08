@@ -29,10 +29,12 @@ public class ParseLDAReducer extends Reducer<Text, UidPrefWritable, LongWritable
             if (uidPrefWritable.getFlage().equals(Constant.FLAG_DOC)) {
                 vector = uidPrefWritable.getVectorWritable();
                 vectorStr = vector.toString().replace("{", "").replace("}", "");
+                System.err.println(vector.toString());
             } else if (uidPrefWritable.getFlage().equals(Constant.FLAG_MATRIX)) {
                 userId = uidPrefWritable.getUidValue().toString();
             }
         }
+
         String[] items = vectorStr.split(",");
         Arrays.sort(items, new Comparator<String>() {
             @Override
@@ -45,6 +47,8 @@ public class ParseLDAReducer extends Reducer<Text, UidPrefWritable, LongWritable
                 return Integer.parseInt(kv2[1]) - Integer.parseInt(kv1[1]);
             }
         });
+        System.err.println("-------------------------------");
+        System.err.println(Arrays.toString(items));
         if (items.length >= 2) {
             vectorStr = items[0].concat("," + items[1]);
             context.write(new LongWritable(Long.parseLong(userId)), new Text(vectorStr));
