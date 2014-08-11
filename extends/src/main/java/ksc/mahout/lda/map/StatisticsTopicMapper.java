@@ -17,7 +17,9 @@ public class StatisticsTopicMapper extends Mapper<LongWritable, Text, Text, Text
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         String[] kv = value.toString().split(",");
-        context.write(new Text(kv[0]), count);
-        context.write(new Text(kv[1]), count);
+        if (kv.length == 2) {
+            context.write(new Text(kv[0]), count);
+            context.write(new Text(kv[1]), count);
+        }
     }
 }
