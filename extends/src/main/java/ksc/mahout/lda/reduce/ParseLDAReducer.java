@@ -25,12 +25,13 @@ public class ParseLDAReducer extends Reducer<Text, UidPrefWritable, LongWritable
         String userId = "";
         Text vector = new Text();
         String vectorStr = "";
+
         for (UidPrefWritable uidPrefWritable : values) {
-            if (uidPrefWritable.getFlage().equals(Constant.FLAG_DOC)) {
+            if (uidPrefWritable.getFlage().toString().equals(Constant.FLAG_DOC)) {
                 vector = uidPrefWritable.getVectorWritable();
                 vectorStr = vector.toString().replace("{", "").replace("}", "");
                 System.err.println(vector.toString());
-            } else if (uidPrefWritable.getFlage().equals(Constant.FLAG_MATRIX)) {
+            } else if (uidPrefWritable.getFlage().toString().equals(Constant.FLAG_MATRIX)) {
                 userId = uidPrefWritable.getUidValue().toString();
             }
         }
