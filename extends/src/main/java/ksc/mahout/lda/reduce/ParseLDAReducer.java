@@ -27,6 +27,7 @@ public class ParseLDAReducer extends Reducer<Text, UidPrefWritable, LongWritable
         String vectorStr = "";
 
         for (UidPrefWritable uidPrefWritable : values) {
+            System.err.println(uidPrefWritable.getVectorWritable().toString());
             if (uidPrefWritable.getFlage().toString().equals(Constant.FLAG_DOC)) {
                 vector = uidPrefWritable.getVectorWritable();
                 vectorStr = vector.toString().replace("{", "").replace("}", "");
