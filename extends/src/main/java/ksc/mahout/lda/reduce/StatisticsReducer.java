@@ -16,9 +16,10 @@ public class StatisticsReducer extends Reducer<Text, Text, Text, Text> {
         for (Text value : values) {
             count++;
         }
+        System.err.println(key.toString());
         /**
          *  取每个传过来的topic-id作为key输出
          */
-        context.write(new Text(key.toString().split(":")[0]), new Text(String.valueOf(count)));
+        context.write(new Text(key.toString()), new Text(String.valueOf(count)));
     }
 }
