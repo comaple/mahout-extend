@@ -19,6 +19,6 @@ public class MatrixMapper extends Mapper<IntWritable, Text, Text, UidPrefWritabl
 
     @Override
     protected void map(IntWritable key, Text value, Context context) throws IOException, InterruptedException {
-        context.write(new Text(key.toString()), new UidPrefWritable(key.get(), Constant.FLAG_MATRIX, value.toString(), new VectorWritable(new DenseVector(new double[]{}))));
+        context.write(new Text(key.toString()), new UidPrefWritable(key.get(), Constant.FLAG_MATRIX, value.toString(), new Text("")));
     }
 }
