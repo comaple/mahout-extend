@@ -9,6 +9,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.mahout.common.IntPairWritable;
 import org.apache.mahout.math.VectorWritable;
+import org.apache.mahout.math.list.DoubleArrayList;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -46,7 +47,7 @@ public class ParseLDAReducer extends Reducer<Text, UidPrefWritable, LongWritable
                 if (kv1.length != kv2.length || kv1.length != 2 || kv2.length != 2) {
                     return -1;
                 }
-                return Integer.parseInt(kv2[1]) - Integer.parseInt(kv1[1]);
+                return (int) (Double.parseDouble(kv2[1]) - Double.parseDouble(kv1[1]));
             }
         });
         System.err.println("-------------------------------");
