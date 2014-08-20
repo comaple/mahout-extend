@@ -215,6 +215,7 @@ public class CVB0Driver extends AbstractJob {
     return maxTermId + 1;
   }
 
+
   public int run(Configuration conf,
                  Path inputPath,
                  Path topicModelOutputPath,
@@ -442,6 +443,17 @@ public class CVB0Driver extends AbstractJob {
     return job;
   }
 
+    /**
+     * 文章路径
+     * @param conf
+     * @param corpus
+     * @param modelInput
+     * @param output
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws InterruptedException
+     */
   private Job writeDocTopicInference(Configuration conf, Path corpus, Path modelInput, Path output)
     throws IOException, ClassNotFoundException, InterruptedException {
     String jobName = String.format("Writing final document/topic inference from %s to %s", corpus, output);
